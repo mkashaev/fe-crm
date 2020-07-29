@@ -11,6 +11,8 @@ import { HistoryPageComponent } from './history-page/history-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { CategoriesFromComponent } from './categories-page/categories-from/categories-from.component';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderPositionsComponent } from './order-page/order-positions/order-positions.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,12 @@ const routes: Routes = [
       { path: 'overview', component: OverviewPageComponent },
       { path: 'analytics', component: AnalyticsPageComponent },
       { path: 'history', component: HistoryPageComponent },
-      { path: 'order', component: OrderPageComponent },
+      {
+        path: 'order', component: OrderPageComponent, children: [
+          { path: '', component: OrderCategoriesComponent },
+          { path: ':id', component: OrderPositionsComponent }
+        ]
+      },
       { path: 'categories', component: CategoriesPageComponent },
       { path: 'categories/new', component: CategoriesFromComponent },
       { path: 'categories/:id', component: CategoriesFromComponent },
@@ -42,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
